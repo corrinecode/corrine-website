@@ -1,0 +1,7 @@
+{
+    "title": "Your Post Title Here",
+    "date": "2025-01-26",
+    "excerpt": "A one or two sentence description of your post.",
+    "image": "",
+    "body": "Start writing your post here.\n\nUse \\n\\n (backslash-n-backslash-n) to create a new paragraph.\n\n## This Creates a Heading\n\nMore text after the heading.\n\n### This Creates a Smaller Heading\n\nEven more text.\n\n> This is a quote or blockquote.\n\nTo add an image in the middle of your post:\n\n[IMAGE: images/your-image-name.jpg]\n[CAPTION: Optional caption for your image.]\n\nTo add a video:\n\n[VIDEO: videos/your-video-name.mp4]\n\nRemember to:\n1. Save this as a new file with a simple name (like my-new-post.json)\n2. Add the filename to the POST_FILES list in js/main.js\n3. Delete these instructions and write your own content!"
+}

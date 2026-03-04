@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--
+    ========================================
+    SINGLE ARTICLE PAGE - article.html
+    ========================================
+    This is a TEMPLATE page. When you click on
+    an article, this page loads and displays
+    that specific article's content.
+
+    The URL will look like: article.html?id=my-article-name
+    The "id" tells the page which article to show.
+    ========================================
+    -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article | Corrine Ciani</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Home button -->
+    <a href="index.html" class="home-button">
+        <img src="images/gifcities.gif" alt="Home">
+    </a>
+
+    
+    <main>
+        <!--
+        ========================================
+        ARTICLE CONTENT AREA
+        ========================================
+        JavaScript fills this in with your article content.
+        -->
+        <article id="article-content" class="article-full">
+            <!-- Article content loads here automatically -->
+            <p class="loading">Loading article...</p>
+        </article>
+
+        <!-- Navigation to go back to writing list -->
+        <div class="back-link">
+            <a href="writing.html">&larr; Back to Writing</a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Corrine Ciani. All rights reserved.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSingleArticle();
+        });
+    </script>
+</body>
+</html>

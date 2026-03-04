@@ -1,0 +1,1156 @@
+/*
+========================================
+MAIN STYLESHEET - style.css
+========================================
+This file controls ALL the visual design
+of your website: colors, fonts, spacing,
+layouts, etc.
+
+TABLE OF CONTENTS:
+1. Color Variables (easy to change!)
+2. Base Styles (fonts, body, links)
+3. Navigation
+4. Hero Section
+5. Page Headers
+6. Article Grid
+7. Blog Post List
+8. Single Article/Post Pages
+9. About Page
+10. Footer
+11. Mobile Responsive Styles
+========================================
+*/
+
+
+/*
+========================================
+1. COLOR VARIABLES
+========================================
+Change these to update colors site-wide!
+Just edit the color codes below.
+
+Current setup: Black text on white background
+========================================
+*/
+:root {
+    /* Main colors - EDIT THESE TO CHANGE YOUR SITE COLORS */
+    --color-background: #ffffff;     /* White background */
+    --color-text: #000000;           /* Black text */
+    --color-text-light: #666666;     /* Gray for subtitles/dates */
+    --color-border: #e0e0e0;         /* Light gray for borders */
+    --color-hover: #333333;          /* Slightly lighter black for hovers */
+
+    /* Spacing (you probably don't need to change these) */
+    --spacing-small: 1rem;           /* 16px */
+    --spacing-medium: 2rem;          /* 32px */
+    --spacing-large: 4rem;           /* 64px */
+    --spacing-xlarge: 6rem;          /* 96px */
+
+    /* Max width for content (keeps text readable) */
+    --max-width: 1200px;
+    --max-width-text: 700px;         /* Narrower for reading articles */
+}
+
+
+/*
+========================================
+2. BASE STYLES
+========================================
+Fundamental styles that apply everywhere.
+========================================
+*/
+
+/* Reset default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Main body styles */
+body {
+    font-family: 'Times New Roman', Times, Georgia, serif;
+    font-size: 18px;
+    line-height: 1.7;                /* Generous line spacing for readability */
+    color: var(--color-text);
+    background-color: var(--color-background);
+}
+
+/* Link styles */
+a {
+    color: var(--color-text);
+    text-decoration: none;
+    transition: opacity 0.2s ease;    /* Smooth hover effect */
+}
+
+a:hover {
+    opacity: 0.6;
+}
+
+/* Image styles - make images responsive */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Video styles */
+video {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Headings */
+h1, h2, h3, h4 {
+    font-weight: normal;              /* Times New Roman looks better without bold */
+    line-height: 1.2;
+}
+
+h1 {
+    font-size: 3rem;
+    letter-spacing: -0.02em;          /* Slight tightening looks more editorial */
+}
+
+h2 {
+    font-size: 1.75rem;
+    margin-bottom: var(--spacing-medium);
+}
+
+h3 {
+    font-size: 1.4rem;
+}
+
+/* Paragraphs */
+p {
+    margin-bottom: 1.5rem;
+}
+
+/* Loading message */
+.loading {
+    color: var(--color-text-light);
+    font-style: italic;
+}
+
+
+/*
+========================================
+3. LANDING PAGE
+========================================
+Full-screen GIF background with
+left-aligned minimal navigation.
+========================================
+*/
+.landing {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Full-screen background GIF/image */
+.landing-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+/* White background landing page */
+.landing-white {
+    background-color: #ffffff;
+}
+
+.landing-white .landing-name {
+    color: #000000 !important;
+    text-shadow: none;
+}
+
+.landing-white .landing-nav a {
+    color: #000000 !important;
+    text-shadow: none;
+}
+
+.landing-white .landing-social a {
+    color: #000000 !important;
+    text-shadow: none;
+}
+
+/* Bottom center gif link */
+.landing-bottom-link {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.landing-bottom-gif {
+    display: block;
+}
+
+/* Bio centered on landing page */
+.landing-bio {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 500px;
+    text-align: left;
+    z-index: 1;
+}
+
+.landing-bio p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    color: #000000;
+}
+
+/* Name in top left */
+.landing-name {
+    position: absolute;
+    top: var(--spacing-medium);
+    left: var(--spacing-medium);
+    font-size: 1.2rem;
+    font-weight: normal;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    color: #ffffff;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+    margin: 0;
+    z-index: 1;
+}
+
+/* Nav vertically centered on left */
+.landing-nav {
+    position: absolute;
+    top: 50%;
+    left: var(--spacing-medium);
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    z-index: 1;
+}
+
+.landing-nav a,
+.landing-nav span {
+    font-size: 1rem;
+    font-weight: normal;
+    color: #ffffff;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+    text-decoration: none;
+}
+
+.landing-nav a:hover {
+    opacity: 0.6;
+}
+
+/* Social links in bottom right */
+.landing-social {
+    position: absolute;
+    bottom: var(--spacing-medium);
+    right: var(--spacing-medium);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.4rem;
+    z-index: 1;
+}
+
+.landing-social a {
+    font-size: 1rem;
+    font-weight: normal;
+    color: #ffffff !important;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+    text-decoration: underline !important;
+    text-underline-offset: 3px;
+}
+
+.landing-social a:hover {
+    opacity: 0.6;
+}
+
+/* Landing page mobile styles */
+@media (max-width: 768px) {
+    .landing-name {
+        top: var(--spacing-small);
+        left: var(--spacing-small);
+        font-size: 1rem;
+    }
+
+    .landing-nav {
+        left: var(--spacing-small);
+        gap: 0.3rem;
+    }
+
+    .landing-nav a {
+        font-size: 0.9rem;
+    }
+}
+
+
+/*
+========================================
+4. HOME BUTTON (Circle)
+========================================
+*/
+.home-button {
+    position: fixed;
+    top: var(--spacing-medium);
+    right: var(--spacing-medium);
+    z-index: 100;
+    transition: opacity 0.2s ease;
+}
+
+.home-button img {
+    height: 40px;
+    width: auto;
+}
+
+.home-button:hover {
+    opacity: 0.6;
+}
+
+
+/*
+========================================
+5. NAVIGATION
+========================================
+Minimal, elegant navigation bar.
+========================================
+*/
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-medium) var(--spacing-large);
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+.nav-logo {
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.nav-links {
+    display: flex;
+    gap: var(--spacing-medium);
+}
+
+.nav-links a {
+    font-size: 0.95rem;
+    letter-spacing: 0.03em;
+}
+
+.nav-links a.active {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+
+/*
+========================================
+4. HERO SECTION
+========================================
+The big intro section on your homepage.
+========================================
+*/
+.hero {
+    text-align: center;
+    padding: var(--spacing-xlarge) var(--spacing-large);
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+.hero-title {
+    font-size: 4rem;
+    margin-bottom: var(--spacing-small);
+    font-weight: normal;
+    letter-spacing: -0.03em;
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    color: var(--color-text-light);
+    font-style: italic;
+}
+
+
+/*
+========================================
+5. PAGE HEADERS
+========================================
+Headers for Articles, Blog, About pages.
+========================================
+*/
+.page-header {
+    text-align: center;
+    padding: var(--spacing-large) var(--spacing-large) var(--spacing-medium);
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+.page-description {
+    color: var(--color-text-light);
+    font-style: italic;
+    margin-top: var(--spacing-small);
+}
+
+
+/*
+========================================
+6. SECTIONS & ARTICLE GRID
+========================================
+Grid layout for displaying articles.
+Magazine-style, image-forward design.
+========================================
+*/
+.section {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: var(--spacing-medium) var(--spacing-large) var(--spacing-xlarge);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: var(--spacing-medium);
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: var(--spacing-small);
+}
+
+.view-all {
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+}
+
+/* Article grid - 3 columns on desktop */
+.article-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-medium);
+}
+
+/* Individual article card */
+.article-card {
+    display: block;
+}
+
+.article-card-image {
+    width: 100%;
+    aspect-ratio: 4 / 3;             /* Consistent image proportions */
+    object-fit: cover;               /* Crop to fill space nicely */
+    margin-bottom: var(--spacing-small);
+    background-color: var(--color-border);  /* Placeholder color while loading */
+}
+
+.article-card-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    font-weight: normal;
+}
+
+.article-card-excerpt {
+    font-size: 0.95rem;
+    color: var(--color-text-light);
+    line-height: 1.5;
+}
+
+
+/*
+========================================
+WRITING LIST (External Links)
+========================================
+*/
+.writing-list {
+    padding: var(--spacing-large) var(--spacing-medium);
+}
+
+.writing-link {
+    display: block;
+    font-size: 1rem;
+    color: var(--color-text);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    margin-bottom: 0.75rem;
+}
+
+.writing-link:hover {
+    opacity: 0.6;
+}
+
+
+/*
+========================================
+PROJECTS PAGE
+========================================
+*/
+.projects-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: var(--spacing-medium);
+    background-color: #dcdcdc;
+}
+
+.project-link {
+    display: block;
+}
+
+.project-gif {
+    max-width: 300px;
+    height: auto;
+}
+
+
+/*
+========================================
+7. BLOG POST LIST
+========================================
+List layout for blog posts.
+========================================
+*/
+
+/* Post list on homepage (preview) */
+.post-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-medium);
+}
+
+/* Full post list on blog page */
+.post-list-full {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-large);
+    max-width: var(--max-width-text);
+    margin: 0 auto;
+    padding: 0 var(--spacing-large);
+}
+
+/* Individual post preview */
+.post-preview {
+    display: block;
+    padding-bottom: var(--spacing-medium);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.post-preview:last-child {
+    border-bottom: none;
+}
+
+.post-date {
+    font-size: 0.85rem;
+    color: var(--color-text-light);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.02em;
+}
+
+.post-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+    font-weight: normal;
+}
+
+.post-excerpt {
+    color: var(--color-text-light);
+    font-size: 1rem;
+}
+
+/* Post with featured image */
+.post-preview-with-image {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: var(--spacing-medium);
+    align-items: start;
+}
+
+.post-preview-image {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    background-color: var(--color-border);
+}
+
+
+/*
+========================================
+BLOG CONTINUOUS SCROLL LAYOUT
+========================================
+Cascading, asymmetric layout with
+staggered images and text blocks.
+========================================
+*/
+.blog-feed {
+    width: 100%;
+    padding: var(--spacing-large) 0;
+}
+
+.blog-scroll {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xlarge);
+}
+
+/* Individual post block in the continuous feed */
+.blog-post-block {
+    width: 100%;
+    position: relative;
+}
+
+/* Cascading content wrapper */
+.blog-post-inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-medium);
+}
+
+/* Staggered content blocks */
+.blog-block {
+    max-width: 55%;
+}
+
+.blog-block.left {
+    align-self: flex-start;
+    margin-left: 5%;
+}
+
+.blog-block.right {
+    align-self: flex-end;
+    margin-right: 5%;
+}
+
+.blog-block.center {
+    align-self: center;
+    max-width: 50%;
+}
+
+.blog-block.wide-left {
+    align-self: flex-start;
+    margin-left: 10%;
+    max-width: 45%;
+}
+
+.blog-block.wide-right {
+    align-self: flex-end;
+    margin-right: 10%;
+    max-width: 45%;
+}
+
+/* Placeholder image boxes */
+.blog-placeholder-img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background-color: #e5e5e5;
+    border: 1px solid #ccc;
+}
+
+.blog-placeholder-img.tall {
+    aspect-ratio: 3 / 4;
+}
+
+.blog-placeholder-img.wide {
+    aspect-ratio: 16 / 9;
+}
+
+.blog-placeholder-img.square {
+    aspect-ratio: 1 / 1;
+}
+
+/* Real images in blog posts */
+.blog-post-image {
+    width: 100%;
+    object-fit: cover;
+}
+
+/* Post content area */
+.blog-post-content {
+    padding: 0 var(--spacing-small);
+}
+
+.blog-post-date {
+    font-size: 0.8rem;
+    color: var(--color-text-light);
+    margin-bottom: 0.25rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.blog-post-title {
+    font-size: 1.8rem;
+    font-weight: normal;
+    margin-bottom: var(--spacing-small);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+.blog-post-body {
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.blog-post-body p {
+    margin-bottom: 1rem;
+}
+
+.blog-post-body ul {
+    list-style-type: disc;
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+}
+
+.blog-post-body ul li {
+    margin-bottom: 0.5rem;
+}
+
+/* Q&A Format Posts */
+/* Q&A content row - text and image side-by-side */
+.qa-content-row {
+    display: flex;
+    width: 100%;
+    padding: 0 5%;
+    gap: 4rem;
+    align-items: flex-start;
+}
+
+.qa-text-col {
+    flex: 1;
+}
+
+.qa-image-col {
+    flex: 0 0 auto;
+}
+
+.qa-image-col .qa-image {
+    max-width: 300px;
+}
+
+.qa-layout {
+    display: flex;
+    gap: 4rem;
+    width: 100%;
+    padding: 0 5%;
+    align-items: flex-start;
+}
+
+.qa-left {
+    flex: 1;
+    max-width: 50%;
+}
+
+.qa-right {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.qa-image {
+    max-width: 300px;
+    object-fit: contain;
+}
+
+.qa-content {
+    max-width: 100%;
+}
+
+.qa-pair {
+    margin-bottom: 2.5rem;
+}
+
+.qa-question {
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+    font-size: 0.95rem;
+}
+
+.qa-answer {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .qa-layout {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .qa-left {
+        max-width: 100%;
+    }
+
+    .qa-right {
+        order: -1;
+    }
+}
+
+/* Essay layout - text left, image right, top-aligned */
+.essay-content {
+    display: flex;
+    width: 100%;
+    padding: 0 5%;
+    gap: 4rem;
+    align-items: flex-start;
+}
+
+.essay-text {
+    flex: 1;
+}
+
+.essay-image-col {
+    flex: 0 0 auto;
+}
+
+.essay-image {
+    max-width: 300px;
+}
+
+@media (max-width: 768px) {
+    .essay-content {
+        flex-direction: column;
+    }
+}
+
+/* Centered blog post layout */
+.blog-centered {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0 5%;
+}
+
+.blog-centered .blog-post-content {
+    max-width: 700px;
+    width: 100%;
+}
+
+.blog-centered .blog-post-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+.blog-centered .blog-post-body p {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+/* Divider between posts */
+.blog-divider {
+    width: 50px;
+    height: 1px;
+    background-color: var(--color-border);
+    margin: var(--spacing-large) auto;
+}
+
+/* Mobile styles for blog feed */
+@media (max-width: 768px) {
+    .blog-block {
+        max-width: 85%;
+    }
+
+    .blog-block.left,
+    .blog-block.wide-left {
+        margin-left: 5%;
+    }
+
+    .blog-block.right,
+    .blog-block.wide-right {
+        margin-right: 5%;
+    }
+
+    .blog-block.center {
+        max-width: 80%;
+    }
+
+    .blog-post-title {
+        font-size: 1.4rem;
+    }
+
+    .blog-post-body {
+        font-size: 0.95rem;
+    }
+}
+
+
+/*
+========================================
+8. SINGLE ARTICLE/POST PAGES
+========================================
+Full article and blog post display.
+========================================
+*/
+.article-full,
+.post-full {
+    max-width: var(--max-width-text);
+    margin: 0 auto;
+    padding: var(--spacing-medium) var(--spacing-large) var(--spacing-xlarge);
+}
+
+/* Article/Post header */
+.content-header {
+    text-align: center;
+    margin-bottom: var(--spacing-large);
+}
+
+.content-title {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-small);
+    font-weight: normal;
+    letter-spacing: -0.02em;
+}
+
+.content-meta {
+    color: var(--color-text-light);
+    font-size: 0.95rem;
+}
+
+/* Featured image at top of article/post */
+.content-featured-image {
+    width: 100%;
+    margin-bottom: var(--spacing-large);
+}
+
+/* Article/Post body content */
+.content-body {
+    font-size: 1.1rem;
+}
+
+.content-body p {
+    margin-bottom: 1.75rem;
+}
+
+.content-body h2 {
+    margin-top: var(--spacing-large);
+    margin-bottom: var(--spacing-small);
+    font-size: 1.5rem;
+}
+
+.content-body h3 {
+    margin-top: var(--spacing-medium);
+    margin-bottom: var(--spacing-small);
+    font-size: 1.25rem;
+}
+
+/* Images within content */
+.content-body img {
+    margin: var(--spacing-medium) 0;
+    width: 100%;
+}
+
+/* Image captions */
+.image-caption {
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    font-style: italic;
+    text-align: center;
+    margin-top: -1rem;
+    margin-bottom: var(--spacing-medium);
+}
+
+/* Videos within content */
+.content-body video {
+    margin: var(--spacing-medium) 0;
+    width: 100%;
+}
+
+/* Blockquotes */
+.content-body blockquote {
+    margin: var(--spacing-medium) 0;
+    padding-left: var(--spacing-medium);
+    border-left: 2px solid var(--color-border);
+    font-style: italic;
+    color: var(--color-text-light);
+}
+
+/* Back link */
+.back-link {
+    max-width: var(--max-width-text);
+    margin: 0 auto;
+    padding: 0 var(--spacing-large) var(--spacing-large);
+}
+
+.back-link a {
+    color: var(--color-text-light);
+    font-size: 0.95rem;
+}
+
+
+/*
+========================================
+9. ABOUT PAGE
+========================================
+Top-left aligned about page layout.
+========================================
+*/
+.about-page {
+    max-width: 500px;
+    margin: 0;
+    padding: var(--spacing-medium) var(--spacing-large);
+}
+
+.about-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin: 0 0 var(--spacing-medium);
+    display: block;
+}
+
+.about-content h1 {
+    text-align: left;
+    margin-bottom: var(--spacing-small);
+    font-size: 1.5rem;
+}
+
+.about-content p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+/* Contact links */
+.contact-links {
+    margin-top: var(--spacing-medium);
+    padding-top: var(--spacing-small);
+    border-top: 1px solid var(--color-border);
+}
+
+.contact-links a {
+    display: inline-block;
+    margin-right: var(--spacing-small);
+    font-size: 0.85rem;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+/* Bio links */
+.bio-link {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.bio-link:hover {
+    opacity: 0.6;
+}
+
+
+/*
+========================================
+10. FOOTER
+========================================
+Simple, minimal footer.
+========================================
+*/
+.footer {
+    text-align: center;
+    padding: var(--spacing-large);
+    color: var(--color-text-light);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--color-border);
+    margin-top: var(--spacing-large);
+}
+
+
+/*
+========================================
+11. MOBILE RESPONSIVE STYLES
+========================================
+Makes your site look great on phones
+and tablets. These styles kick in when
+the screen is smaller than 768px.
+========================================
+*/
+@media (max-width: 768px) {
+    /* Smaller font sizes on mobile */
+    body {
+        font-size: 16px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+
+    /* Stack navigation vertically on mobile */
+    .main-nav {
+        flex-direction: column;
+        gap: var(--spacing-small);
+        padding: var(--spacing-small) var(--spacing-medium);
+    }
+
+    .nav-links {
+        gap: var(--spacing-small);
+    }
+
+    /* Reduce padding on mobile */
+    .hero,
+    .page-header,
+    .section,
+    .article-full,
+    .post-full,
+    .about-page {
+        padding-left: var(--spacing-medium);
+        padding-right: var(--spacing-medium);
+    }
+
+    /* Single column grid on mobile */
+    .article-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-large);
+    }
+
+    /* Stack post preview image above text on mobile */
+    .post-preview-with-image {
+        grid-template-columns: 1fr;
+    }
+
+    .post-list-full {
+        padding: 0 var(--spacing-medium);
+    }
+
+    .back-link {
+        padding-left: var(--spacing-medium);
+        padding-right: var(--spacing-medium);
+    }
+
+    /* Section header stacks on mobile */
+    .section-header {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .content-title {
+        font-size: 2rem;
+    }
+}
+
+/* Even smaller screens (phones in portrait) */
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .content-title {
+        font-size: 1.75rem;
+    }
+
+    .post-title {
+        font-size: 1.25rem;
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "title": "Your Article Title Here",
+    "date": "2025-01-26",
+    "excerpt": "A compelling one or two sentence description of your article.",
+    "image": "images/article-cover.jpg",
+    "featured": false,
+    "body": "Start writing your article here.\n\nUse \\n\\n (backslash-n-backslash-n) to create a new paragraph.\n\n## This Creates a Section Heading\n\nArticles often have multiple sections. Use ## headings to organize your piece.\n\n### This Creates a Smaller Subheading\n\nFor sub-sections within a section.\n\n> This is a quote or blockquote. Great for memorable quotes or key ideas.\n\n## Adding Media\n\nTo add an image:\n\n[IMAGE: images/your-image-name.jpg]\n[CAPTION: Optional caption describing the image.]\n\nTo add a video:\n\n[VIDEO: videos/your-video-name.mp4]\n\n## Publishing Checklist\n\nRemember to:\n1. Save this as a new file with a simple name (like my-great-article.json)\n2. Add the filename to the ARTICLE_FILES list in js/main.js\n3. Set 'featured': true if you want it on the homepage\n4. Add your cover image to the images folder\n5. Delete these instructions and write your own content!"
+}

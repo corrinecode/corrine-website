@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Corrine Ciani</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .split-container {
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .split-section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .split-section.black-bg {
+            background-color: #000000;
+        }
+
+        .split-section.grey-bg {
+            background-color: #dcdcdc;
+        }
+
+        .split-section .project-link {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .split-section .project-gif {
+            width: 350px;
+            height: auto;
+        }
+
+        @media (max-width: 768px) {
+            .split-container {
+                flex-direction: column;
+            }
+
+            .split-section {
+                height: 50vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Home button -->
+    <a href="index.html" class="home-button">
+        <img src="images/gifcities.gif" alt="Home">
+    </a>
+
+    <div class="split-container">
+        <!-- Club Chess Section - Left -->
+        <section class="split-section black-bg">
+            <a href="https://www.clubchess.co/" target="_blank" class="project-link">
+                <img src="images/club-chess-board-2.gif" alt="Club Chess" class="project-gif">
+            </a>
+        </section>
+
+        <!-- Zora Zine Section - Right -->
+        <section class="split-section grey-bg">
+            <a href="https://zine.zora.co/" target="_blank" class="project-link">
+                <img src="images/3d-mag.gif" alt="Zora Zine" class="project-gif">
+            </a>
+        </section>
+    </div>
+</body>
+</html>

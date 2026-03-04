@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--
+    ========================================
+    SINGLE BLOG POST PAGE - post.html
+    ========================================
+    This is a TEMPLATE page. When you click on
+    a blog post, this page loads and displays
+    that specific post's content.
+
+    The URL will look like: post.html?id=my-post-name
+    ========================================
+    -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post | Corrine Ciani</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Home button -->
+    <a href="index.html" class="home-button">
+        <img src="images/gifcities.gif" alt="Home">
+    </a>
+
+    
+    <main>
+        <!--
+        ========================================
+        POST CONTENT AREA
+        ========================================
+        JavaScript fills this in with your post content.
+        -->
+        <article id="post-content" class="post-full">
+            <!-- Post content loads here automatically -->
+            <p class="loading">Loading post...</p>
+        </article>
+
+        <!-- Navigation to go back to blog list -->
+        <div class="back-link">
+            <a href="blog.html">&larr; Back to Blog</a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Corrine Ciani. All rights reserved.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSinglePost();
+        });
+    </script>
+</body>
+</html>

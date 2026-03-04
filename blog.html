@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--
+    ========================================
+    BLOG PAGE - blog.html
+    ========================================
+    Continuous scroll layout - all posts
+    displayed as one long feed.
+    ========================================
+    -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | Corrine Ciani</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Home button -->
+    <a href="index.html" class="home-button">
+        <img src="images/gifcities.gif" alt="Home">
+    </a>
+
+    <main class="blog-feed">
+        <!-- All blog posts load here as a continuous scroll -->
+        <div id="all-posts" class="blog-scroll">
+            <!-- Blog posts load here automatically -->
+        </div>
+    </main>
+
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAllPosts();
+        });
+    </script>
+</body>
+</html>
