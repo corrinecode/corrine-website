@@ -32,6 +32,7 @@ const ARTICLE_FILES = [
 // List all your blog post files here (without the .json extension)
 // Example: ['my-first-post', 'thoughts-on-writing', 'new-project']
 const POST_FILES = [
+    'questions-for-jeremy-dan',
     'questions-for-maggie-cnossen',
     'chinese-marching-band',
     'dream-job',
@@ -386,7 +387,7 @@ function createFullPostBlock(post) {
             if (lines.length >= 2) {
                 html += `<div class="qa-pair">`;
                 html += `<p class="qa-question">${lines[0]}</p>`;
-                html += `<p class="qa-answer">${lines[1]}</p>`;
+                html += `<p class="qa-answer">${lines.slice(1).join('<br>')}</p>`;
                 html += `</div>`;
             } else if (lines.length === 1 && lines[0].trim()) {
                 html += `<p>${lines[0]}</p>`;
