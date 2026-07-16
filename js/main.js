@@ -302,9 +302,19 @@ BLOG PAGE FUNCTIONS
 ========================================
 */
 
-// Load all posts for the blog page (continuous scroll layout)
-async function loadAllPosts() {
-    const container = document.getElementById('all-posts');
+// Determine which section a post belongs to.
+// Uses an explicit "category" field if present; otherwise auto-detects:
+// Q&A interviews go to "questions", everything else goes to "notes".
+function getPostCategory(post) {
+    if (post.category) return post.category.toLowerCase();
+    const isQA = post.title.includes('Questions for') || post.format === 'qa';
+    return isQA ? 'questions' : 'notes';
+}
+
+// Load posts into a continuous scroll layout, optionally filtered by section.
+// category: 'questions', 'notes', or null/undefined for all posts.
+async function loadPostsInto(containerId, category) {
+    const container = document.getElementById(containerId);
     if (!container) return;
 
     container.innerHTML = '';
@@ -318,17 +328,37 @@ async function loadAllPosts() {
         }
     }
 
+    // Filter by section if one was requested
+    const filtered = category
+        ? posts.filter(post => getPostCategory(post) === category)
+        : posts;
+
     // Sort by date (newest first)
-    posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+    filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
 
     // Display full content of each post in a continuous scroll
-    posts.forEach(post => {
+    filtered.forEach(post => {
         container.innerHTML += createFullPostBlock(post);
     });
 
-    if (posts.length === 0) {
-        container.innerHTML = '<p class="loading">No blog posts yet. Add some to the content/posts folder!</p>';
+    if (filtered.length === 0) {
+        container.innerHTML = '<p class="loading">No posts yet. Add some to the content/posts folder!</p>';
     }
+}
+
+// Load all posts for the blog page (continuous scroll layout)
+async function loadAllPosts() {
+    return loadPostsInto('all-posts', null);
+}
+
+// Load only the Questions (Q&A interview) posts
+async function loadQuestions() {
+    return loadPostsInto('all-posts', 'questions');
+}
+
+// Load only the Notes posts
+async function loadNotes() {
+    return loadPostsInto('all-posts', 'notes');
 }
 
 // Create a full post block with cascading layout
