@@ -5,8 +5,8 @@
     ========================================
     BLOG PAGE - blog.html
     ========================================
-    Continuous scroll layout - all posts
-    displayed as one long feed.
+    Menu page: two section words (Notes,
+    Questions) that link to their own pages.
     ========================================
     -->
     <meta charset="UTF-8">
@@ -20,18 +20,9 @@
         <img src="images/gifcities.gif" alt="Home">
     </a>
 
-    <main class="blog-feed">
-        <!-- All blog posts load here as a continuous scroll -->
-        <div id="all-posts" class="blog-scroll">
-            <!-- Blog posts load here automatically -->
-        </div>
+    <main class="blog-menu">
+        <a href="notes.html" class="blog-menu-link">Notes</a>
+        <a href="questions.html" class="blog-menu-link">Questions</a>
     </main>
-
-    <script src="js/main.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            loadBlogSections();
-        });
-    </script>
 </body>
 </html>
