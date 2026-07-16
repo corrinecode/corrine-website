@@ -601,6 +601,16 @@ staggered images and text blocks.
     gap: var(--spacing-xlarge);
 }
 
+/* Section header dividing the blog feed (Notes, Questions) */
+.blog-section-title {
+    font-size: 2.4rem;
+    font-weight: normal;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--spacing-small);
+    padding-bottom: var(--spacing-small);
+    border-bottom: 1px solid currentColor;
+}
+
 /* Individual post block in the continuous feed */
 .blog-post-block {
     width: 100%;

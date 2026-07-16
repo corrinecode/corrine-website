@@ -361,6 +361,45 @@ async function loadNotes() {
     return loadPostsInto('all-posts', 'notes');
 }
 
+// Load the blog page as one feed split into labeled sections (Notes, Questions)
+async function loadBlogSections() {
+    const container = document.getElementById('all-posts');
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    const posts = [];
+    for (const filename of POST_FILES) {
+        const post = await fetchJSON(`content/posts/${filename}.json`);
+        if (post) {
+            post.id = filename;
+            posts.push(post);
+        }
+    }
+
+    // Section order and labels
+    const sections = [
+        { key: 'notes', label: 'Notes' },
+        { key: 'questions', label: 'Questions' }
+    ];
+
+    let html = '';
+    sections.forEach(section => {
+        const inSection = posts
+            .filter(post => getPostCategory(post) === section.key)
+            .sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        if (inSection.length === 0) return;
+
+        html += `<h2 class="blog-section-title">${section.label}</h2>`;
+        inSection.forEach(post => {
+            html += createFullPostBlock(post);
+        });
+    });
+
+    container.innerHTML = html || '<p class="loading">No posts yet. Add some to the content/posts folder!</p>';
+}
+
 // Create a full post block with cascading layout
 function createFullPostBlock(post) {
     // Position patterns for cascading effect
