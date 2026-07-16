@@ -351,7 +351,6 @@ function createFullPostBlock(post) {
         // Poem format: title on left, body centered with line breaks preserved
         html += '<div class="blog-block left">';
         html += '<div class="blog-post-content">';
-        html += `<p class="blog-post-date">${formatDate(post.date)}</p>`;
         html += `<h2 class="blog-post-title">${post.title}</h2>`;
         html += '</div></div>';
 
@@ -371,7 +370,6 @@ function createFullPostBlock(post) {
         // Title block - right aligned
         html += '<div class="blog-block right">';
         html += '<div class="blog-post-content">';
-        html += `<p class="blog-post-date">${formatDate(post.date)}</p>`;
         html += `<h2 class="blog-post-title">${post.title}</h2>`;
         html += '</div></div>';
 
@@ -414,7 +412,6 @@ function createFullPostBlock(post) {
         // Title block on right
         html += '<div class="blog-block right">';
         html += '<div class="blog-post-content">';
-        html += `<p class="blog-post-date">${formatDate(post.date)}</p>`;
         html += `<h2 class="blog-post-title">${post.title}</h2>`;
         html += '</div></div>';
 
@@ -463,7 +460,6 @@ async function loadSinglePost() {
     let html = `
         <header class="content-header">
             <h1 class="content-title">${post.title}</h1>
-            <p class="content-meta">${formatDate(post.date)}</p>
         </header>
     `;
 
@@ -482,7 +478,6 @@ async function loadSinglePost() {
 function createPostPreview(post) {
     return `
         <a href="post.html?id=${post.id}" class="post-preview">
-            <p class="post-date">${formatDate(post.date)}</p>
             <h3 class="post-title">${post.title}</h3>
             <p class="post-excerpt">${post.excerpt || ''}</p>
         </a>
@@ -496,7 +491,6 @@ function createPostPreviewFull(post) {
             <a href="post.html?id=${post.id}" class="post-preview post-preview-with-image">
                 <img src="${post.image}" alt="${post.title}" class="post-preview-image">
                 <div>
-                    <p class="post-date">${formatDate(post.date)}</p>
                     <h3 class="post-title">${post.title}</h3>
                     <p class="post-excerpt">${post.excerpt || ''}</p>
                 </div>
@@ -506,7 +500,6 @@ function createPostPreviewFull(post) {
 
     return `
         <a href="post.html?id=${post.id}" class="post-preview">
-            <p class="post-date">${formatDate(post.date)}</p>
             <h3 class="post-title">${post.title}</h3>
             <p class="post-excerpt">${post.excerpt || ''}</p>
         </a>
