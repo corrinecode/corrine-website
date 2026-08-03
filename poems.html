@@ -3,15 +3,15 @@
 <head>
     <!--
     ========================================
-    OBSERVATIONS PAGE - notes.html
+    POEMS PAGE - poems.html
     ========================================
-    Menu of titles. Each links to its piece;
-    "Poems" opens a page with all poems.
+    Continuous scroll of all poems
+    (Dream Job, Just Passing Through).
     ========================================
     -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Observations | Corrine Ciani</title>
+    <title>Poems | Corrine Ciani</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -20,10 +20,18 @@
         <img src="images/gifcities.gif" alt="Home">
     </a>
 
-    <main class="blog-menu">
-        <a href="post.html?id=smoking-sections" class="blog-menu-link">Smoking Sections</a>
-        <a href="post.html?id=chinese-marching-band" class="blog-menu-link">Chinese Marching Band</a>
-        <a href="poems.html" class="blog-menu-link">Poems</a>
+    <main class="blog-feed">
+        <!-- Poems load here as a continuous scroll -->
+        <div id="all-posts" class="blog-scroll">
+            <!-- Posts load here automatically -->
+        </div>
     </main>
+
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            loadPoems();
+        });
+    </script>
 </body>
 </html>
