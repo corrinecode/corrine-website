@@ -488,6 +488,41 @@ WRITING LIST (External Links)
 }
 
 
+/* Lectures page - embedded videos with a title beneath each */
+.lectures {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--spacing-large) var(--spacing-medium);
+}
+
+.lecture {
+    margin-bottom: var(--spacing-large);
+}
+
+/* Responsive 16:9 video wrapper */
+.lecture-video {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    height: 0;
+    margin-bottom: var(--spacing-small);
+}
+
+.lecture-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.lecture-title {
+    font-size: 1rem;
+    text-align: center;
+}
+
+
 /*
 ========================================
 PROJECTS PAGE
