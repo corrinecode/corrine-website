@@ -361,6 +361,34 @@ async function loadNotes() {
     return loadPostsInto('all-posts', 'notes');
 }
 
+// Load the poems (posts with format "poem") as one feed
+async function loadPoems() {
+    const container = document.getElementById('all-posts');
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    const posts = [];
+    for (const filename of POST_FILES) {
+        const post = await fetchJSON(`content/posts/${filename}.json`);
+        if (post) {
+            post.id = filename;
+            posts.push(post);
+        }
+    }
+
+    const poems = posts
+        .filter(post => post.format === 'poem')
+        .sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    let html = '';
+    poems.forEach(post => {
+        html += createFullPostBlock(post);
+    });
+
+    container.innerHTML = html || '<p class="loading">No poems yet. Add some to the content/posts folder!</p>';
+}
+
 // Create a full post block with cascading layout
 function createFullPostBlock(post) {
     // Position patterns for cascading effect
