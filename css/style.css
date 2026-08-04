@@ -275,21 +275,48 @@ left-aligned minimal navigation.
     opacity: 0.6;
 }
 
-/* Landing page mobile styles */
+/* Landing page mobile styles - stack everything in normal flow */
 @media (max-width: 768px) {
+    .landing {
+        height: auto;
+        min-height: 100vh;
+        overflow: visible;
+        padding: var(--spacing-medium) var(--spacing-small) var(--spacing-large);
+    }
+
     .landing-name {
-        top: var(--spacing-small);
-        left: var(--spacing-small);
-        font-size: 1rem;
+        position: static;
+        font-size: 1.1rem;
+        margin-bottom: var(--spacing-medium);
     }
 
     .landing-nav {
-        left: var(--spacing-small);
-        gap: 0.3rem;
+        position: static;
+        transform: none;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-bottom: var(--spacing-large);
     }
 
     .landing-nav a {
-        font-size: 0.9rem;
+        font-size: 1rem;
+    }
+
+    .landing-bio {
+        position: static;
+        transform: none;
+        max-width: 100%;
+        margin-bottom: var(--spacing-large);
+    }
+
+    .landing-bio p {
+        font-size: 1rem;
+    }
+
+    .landing-social {
+        position: static;
+        align-items: flex-start;
     }
 }
 
@@ -853,6 +880,27 @@ staggered images and text blocks.
 
     .qa-right {
         order: -1;
+    }
+
+    /* Stack the Q&A text and portrait vertically on phones */
+    .qa-content-row {
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 0 var(--spacing-small);
+    }
+
+    .qa-text-col,
+    .qa-image-col {
+        flex: 1 1 auto;
+        width: 100%;
+    }
+
+    .qa-image-col {
+        order: -1;
+    }
+
+    .qa-image-col .qa-image {
+        max-width: 100%;
     }
 }
 
