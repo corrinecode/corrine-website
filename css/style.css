@@ -718,6 +718,16 @@ staggered images and text blocks.
     letter-spacing: -0.02em;
 }
 
+/* Observations menu - smaller titles, still centered */
+.observations-menu {
+    gap: 0.4rem;
+}
+
+.observations-menu .blog-menu-link {
+    font-size: 1.1rem;
+    letter-spacing: normal;
+}
+
 /* Individual post block in the continuous feed */
 .blog-post-block {
     width: 100%;
