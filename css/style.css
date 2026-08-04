@@ -488,6 +488,19 @@ WRITING LIST (External Links)
 }
 
 
+/* Interview image page - displays a full magazine spread */
+.interview {
+    padding: var(--spacing-large) var(--spacing-medium);
+    text-align: center;
+}
+
+.interview img {
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+
+
 /* Lectures page - embedded videos with a title beneath each */
 .lectures {
     max-width: 800px;
