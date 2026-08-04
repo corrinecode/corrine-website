@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--
+    ========================================
+    ITALY PAGE - italy.html
+    ========================================
+    Continuous scroll of Italy pieces
+    (posts with "category": "italy").
+    ========================================
+    -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Italy | Corrine Ciani</title>
+    <link rel="stylesheet" href="css/style.css?v=20260804">
+</head>
+<body>
+    <!-- Home button -->
+    <a href="index.html" class="home-button">
+        <img src="images/gifcities.gif" alt="Home">
+    </a>
+
+    <main class="blog-feed">
+        <!-- Italy posts load here as a continuous scroll -->
+        <div id="all-posts" class="blog-scroll">
+            <!-- Posts load here automatically -->
+        </div>
+
+        <div class="back-link">
+            <a href="notes.html">&larr; Back to Observations</a>
+        </div>
+    </main>
+
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            loadItaly();
+        });
+    </script>
+</body>
+</html>

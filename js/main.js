@@ -389,6 +389,11 @@ async function loadPoems() {
     container.innerHTML = html || '<p class="loading">No poems yet. Add some to the content/posts folder!</p>';
 }
 
+// Load the Italy posts (category "italy") as one feed
+async function loadItaly() {
+    return loadPostsInto('all-posts', 'italy');
+}
+
 // Create a full post block with cascading layout
 function createFullPostBlock(post) {
     // Position patterns for cascading effect
