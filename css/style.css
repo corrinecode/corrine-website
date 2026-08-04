@@ -529,6 +529,30 @@ WRITING LIST (External Links)
 }
 
 
+/* Italy page - stacked images with a line of text above each */
+.italy {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: var(--spacing-large) var(--spacing-medium);
+}
+
+.italy-block {
+    margin-bottom: var(--spacing-xlarge);
+}
+
+.italy-caption {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: var(--spacing-large);
+    min-height: 1.6em;
+}
+
+.italy img {
+    width: 100%;
+    height: auto;
+}
+
+
 /* Lectures page - embedded videos with a title beneath each */
 .lectures {
     max-width: 800px;
