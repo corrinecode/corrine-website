@@ -32,6 +32,7 @@ const ARTICLE_FILES = [
 // List all your blog post files here (without the .json extension)
 // Example: ['my-first-post', 'thoughts-on-writing', 'new-project']
 const POST_FILES = [
+    'free-falling',
     'questions-for-jeremy-dan',
     'questions-for-maggie-cnossen',
     'chinese-marching-band',
