@@ -37,7 +37,6 @@ const POST_FILES = [
     'questions-for-jeremy-dan',
     'questions-for-maggie-cnossen',
     'chinese-marching-band',
-    'dream-job',
     'questions-for-alec',
     'just-passing-through',
     'smoking-sections',
