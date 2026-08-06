@@ -537,7 +537,7 @@ WRITING LIST (External Links)
 }
 
 .italy-block {
-    margin-bottom: var(--spacing-xlarge);
+    margin-bottom: var(--spacing-medium);
 }
 
 .italy-caption {
@@ -555,7 +555,7 @@ WRITING LIST (External Links)
 }
 
 .italy-text {
-    margin-bottom: var(--spacing-xlarge);
+    margin-bottom: var(--spacing-medium);
 }
 
 .italy-text p {
@@ -572,7 +572,7 @@ WRITING LIST (External Links)
 .italy-row {
     display: flex;
     gap: 1rem;
-    margin-bottom: var(--spacing-xlarge);
+    margin-bottom: var(--spacing-medium);
     align-items: flex-start;
 }
 
