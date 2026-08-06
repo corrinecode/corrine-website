@@ -554,6 +554,20 @@ WRITING LIST (External Links)
     height: auto;
 }
 
+.italy-text {
+    margin-bottom: var(--spacing-xlarge);
+}
+
+.italy-text p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 1.2rem;
+}
+
+.italy-text p:last-child {
+    margin-bottom: 0;
+}
+
 
 /* Lectures page - embedded videos with a title beneath each */
 .lectures {
