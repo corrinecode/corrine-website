@@ -33,6 +33,7 @@ const ARTICLE_FILES = [
 // Example: ['my-first-post', 'thoughts-on-writing', 'new-project']
 const POST_FILES = [
     'palm-trees',
+    'newborn-lamb',
     'free-falling',
     'questions-for-jeremy-dan',
     'questions-for-maggie-cnossen',
