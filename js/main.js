@@ -358,6 +358,19 @@ async function loadQuestions() {
     return loadPostsInto('all-posts', 'questions');
 }
 
+// Load a single interview by its post filename (its own shareable page)
+async function loadInterview(filename) {
+    const container = document.getElementById('all-posts');
+    if (!container) return;
+    const post = await fetchJSON(`content/posts/${filename}.json`);
+    if (!post) {
+        container.innerHTML = '<p class="loading">Interview not found.</p>';
+        return;
+    }
+    post.id = filename;
+    container.innerHTML = createFullPostBlock(post);
+}
+
 // Load only the Notes posts
 async function loadNotes() {
     return loadPostsInto('all-posts', 'notes');

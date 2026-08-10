@@ -3,15 +3,14 @@
 <head>
     <!--
     ========================================
-    QUESTIONS PAGE - questions.html
+    INTERVIEW PAGE - maggie-cnossen.html
     ========================================
-    Menu of names. Each links to that
-    person's own interview page.
+    A single, shareable interview.
     ========================================
     -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Questions | Corrine Ciani</title>
+    <title>Maggie Cnossen | Corrine Ciani</title>
     <link rel="stylesheet" href="css/style.css?v=20260809">
 </head>
 <body>
@@ -20,11 +19,19 @@
         <img src="images/gifcities.gif" alt="Home">
     </a>
 
-    <main class="blog-menu observations-menu">
-        <a href="jeremy-dan.html" class="blog-menu-link">Jeremy Dan</a>
-        <a href="maggie-cnossen.html" class="blog-menu-link">Maggie Cnossen</a>
-        <a href="alec-luke-bahta.html" class="blog-menu-link">Alec Luke Bahta</a>
-        <a href="questions-for-myself.html" class="blog-menu-link">Me</a>
+    <main class="blog-feed">
+        <div id="all-posts" class="blog-scroll"></div>
+
+        <div class="back-link">
+            <a href="questions.html">&larr; Back to Questions</a>
+        </div>
     </main>
+
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            loadInterview('questions-for-maggie-cnossen');
+        });
+    </script>
 </body>
 </html>
