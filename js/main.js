@@ -40,6 +40,7 @@ const POST_FILES = [
     'chinese-marching-band',
     'questions-for-alec',
     'just-passing-through',
+    'la-owls',
     'smoking-sections',
     'questions-for-myself'
 ];
