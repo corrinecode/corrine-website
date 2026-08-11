@@ -1192,6 +1192,18 @@ Full article and blog post display.
     font-size: 0.95rem;
 }
 
+/* On the centered menu pages, anchor the back link to the bottom */
+.blog-menu {
+    position: relative;
+}
+
+.blog-menu .menu-back-link {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
 
 /*
 ========================================
