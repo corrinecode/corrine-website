@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--
+    ========================================
+    TRACKLIST TOOL - tracklist.html
+    ========================================
+    Pulls the songs, in order, out of a
+    YouTube mix / DJ set. Paste the video
+    URL (it tries to grab the description
+    automatically) or paste the description
+    text yourself, and it reads the
+    timestamped tracklist into a clean,
+    numbered, exportable list.
+
+    No accounts, no API keys, no build step.
+    Pure client-side — safe on GitHub Pages.
+    ========================================
+    -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tracklist | Corrine Ciani</title>
+    <link rel="stylesheet" href="css/style.css?v=20260809">
+    <style>
+        /* Scoped styles for the tracklist tool only */
+        .tl-main {
+            max-width: var(--max-width-text);
+            margin: 0 auto;
+            padding: var(--spacing-large) var(--spacing-medium) var(--spacing-xlarge);
+        }
+
+        .tl-header {
+            text-align: center;
+            margin-bottom: var(--spacing-large);
+        }
+
+        .tl-header h1 {
+            font-size: 2.5rem;
+        }
+
+        .tl-header .page-description {
+            color: var(--color-text-light);
+            font-style: italic;
+            margin-top: var(--spacing-small);
+        }
+
+        .tl-field {
+            margin-bottom: var(--spacing-medium);
+        }
+
+        .tl-field label {
+            display: block;
+            font-size: 0.85rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--color-text-light);
+            margin-bottom: 0.4rem;
+        }
+
+        .tl-input,
+        .tl-textarea {
+            width: 100%;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--color-text);
+            background: var(--color-background);
+            border: 1px solid var(--color-border);
+            padding: 0.75rem;
+            line-height: 1.5;
+        }
+
+        .tl-input:focus,
+        .tl-textarea:focus {
+            outline: none;
+            border-color: var(--color-text);
+        }
+
+        .tl-textarea {
+            min-height: 180px;
+            resize: vertical;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+        }
+
+        .tl-row {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .tl-row .tl-input {
+            flex: 1 1 240px;
+        }
+
+        .tl-btn {
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--color-background);
+            background: var(--color-text);
+            border: 1px solid var(--color-text);
+            padding: 0.65rem 1.4rem;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .tl-btn:hover { opacity: 0.7; }
+
+        .tl-btn.secondary {
+            color: var(--color-text);
+            background: var(--color-background);
+        }
+
+        .tl-btn:disabled {
+            opacity: 0.4;
+            cursor: default;
+        }
+
+        .tl-options {
+            display: flex;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--color-text-light);
+            margin-top: var(--spacing-small);
+        }
+
+        .tl-options label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            cursor: pointer;
+            text-transform: none;
+            letter-spacing: normal;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .tl-status {
+            font-style: italic;
+            color: var(--color-text-light);
+            min-height: 1.5em;
+            margin-top: 0.75rem;
+        }
+
+        .tl-status.error { color: #a00000; }
+
+        .tl-results {
+            margin-top: var(--spacing-large);
+        }
+
+        .tl-results-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            border-bottom: 1px solid var(--color-text);
+            padding-bottom: 0.5rem;
+            margin-bottom: var(--spacing-small);
+        }
+
+        .tl-count { color: var(--color-text-light); font-style: italic; }
+
+        .tl-list { list-style: none; }
+
+        .tl-track {
+            display: flex;
+            align-items: baseline;
+            gap: 0.75rem;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .tl-num {
+            color: var(--color-text-light);
+            font-variant-numeric: tabular-nums;
+            min-width: 2ch;
+            text-align: right;
+        }
+
+        .tl-time {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.85rem;
+            color: var(--color-text-light);
+            min-width: 7ch;
+        }
+
+        .tl-time a { color: var(--color-text-light); }
+        .tl-time a:hover { color: var(--color-text); opacity: 1; }
+
+        .tl-song { flex: 1; }
+        .tl-song .tl-artist { font-style: italic; }
+        .tl-song .tl-sep { color: var(--color-text-light); }
+
+        .tl-search {
+            font-size: 0.8rem;
+            color: var(--color-text-light);
+            text-decoration: underline;
+            white-space: nowrap;
+        }
+
+        .tl-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: var(--spacing-medium);
+        }
+
+        .tl-empty {
+            color: var(--color-text-light);
+            font-style: italic;
+            padding: var(--spacing-medium) 0;
+        }
+
+        .tl-hint {
+            font-size: 0.85rem;
+            color: var(--color-text-light);
+            margin-top: 0.4rem;
+        }
+
+        @media (max-width: 600px) {
+            .tl-track { flex-wrap: wrap; }
+            .tl-search { margin-left: auto; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Home button -->
+    <a href="index.html" class="home-button">
+        <img src="images/gifcities.gif" alt="Home">
+    </a>
+
+    <main class="tl-main">
+        <div class="tl-header">
+            <h1>Tracklist</h1>
+            <p class="page-description">Pull the songs, in order, out of a YouTube mix or DJ set.</p>
+        </div>
+
+        <!-- URL input with auto-fetch -->
+        <div class="tl-field">
+            <label for="tl-url">YouTube video link</label>
+            <div class="tl-row">
+                <input
+                    type="url"
+                    id="tl-url"
+                    class="tl-input"
+                    placeholder="https://www.youtube.com/watch?v=..."
+                    autocomplete="off"
+                    spellcheck="false">
+                <button type="button" id="tl-fetch" class="tl-btn">Get tracklist</button>
+            </div>
+            <p class="tl-hint">Paste a mix and press <em>Get tracklist</em>. If auto-grab is blocked, paste the video's description below instead.</p>
+        </div>
+
+        <!-- Manual description paste -->
+        <div class="tl-field">
+            <label for="tl-text">…or paste the description / tracklist text</label>
+            <textarea
+                id="tl-text"
+                class="tl-textarea"
+                spellcheck="false"
+                placeholder="0:00 Artist — Song Title&#10;3:45 Another Artist — Another Song&#10;7:12 …"></textarea>
+            <div class="tl-options">
+                <label><input type="checkbox" id="tl-only-ts" checked> Only lines with timestamps</label>
+                <label><input type="checkbox" id="tl-sort-ts"> Sort by timestamp</label>
+                <button type="button" id="tl-parse" class="tl-btn secondary">Read tracklist</button>
+            </div>
+            <p class="tl-status" id="tl-status"></p>
+        </div>
+
+        <!-- Results -->
+        <section class="tl-results" id="tl-results" hidden>
+            <div class="tl-results-head">
+                <h2 style="font-size:1.5rem;">Songs</h2>
+                <span class="tl-count" id="tl-count"></span>
+            </div>
+            <ol class="tl-list" id="tl-list"></ol>
+            <div class="tl-actions">
+                <button type="button" class="tl-btn secondary" id="tl-copy">Copy list</button>
+                <button type="button" class="tl-btn secondary" id="tl-txt">Download .txt</button>
+                <button type="button" class="tl-btn secondary" id="tl-csv">Download .csv</button>
+            </div>
+        </section>
+    </main>
+
+    <script>
+    (function () {
+        'use strict';
+
+        // ---- Elements ----
+        var urlEl     = document.getElementById('tl-url');
+        var textEl    = document.getElementById('tl-text');
+        var fetchBtn  = document.getElementById('tl-fetch');
+        var parseBtn  = document.getElementById('tl-parse');
+        var onlyTsEl  = document.getElementById('tl-only-ts');
+        var sortTsEl  = document.getElementById('tl-sort-ts');
+        var statusEl  = document.getElementById('tl-status');
+        var resultsEl = document.getElementById('tl-results');
+        var listEl    = document.getElementById('tl-list');
+        var countEl   = document.getElementById('tl-count');
+        var copyBtn   = document.getElementById('tl-copy');
+        var txtBtn    = document.getElementById('tl-txt');
+        var csvBtn    = document.getElementById('tl-csv');
+
+        var currentTracks = [];
+        var currentVideoId = '';
+
+        // ---- Helpers ----
+        function setStatus(msg, isError) {
+            statusEl.textContent = msg || '';
+            statusEl.classList.toggle('error', !!isError);
+        }
+
+        // Extract an 11-char video id from most YouTube URL shapes.
+        function parseVideoId(url) {
+            if (!url) return '';
+            url = url.trim();
+            var m = url.match(/[?&]v=([A-Za-z0-9_-]{11})/)
+                 || url.match(/youtu\.be\/([A-Za-z0-9_-]{11})/)
+                 || url.match(/\/(?:embed|shorts|live)\/([A-Za-z0-9_-]{11})/)
+                 || url.match(/^([A-Za-z0-9_-]{11})$/);
+            return m ? m[1] : '';
+        }
+
+        // "1:02:03" / "12:34" / "1:23" -> total seconds
+        function timeToSeconds(t) {
+            var parts = t.split(':').map(Number);
+            var s = 0;
+            for (var i = 0; i < parts.length; i++) s = s * 60 + parts[i];
+            return s;
+        }
+
+        var TS_RE = /(?:^|[^\d:])((?:\d{1,2}:)?\d{1,2}:\d{2})(?![\d:])/;
+
+        // Strip leading track numbering like "1." "01)" "#3" "12 -"
+        function stripLeadNumber(s) {
+            return s.replace(/^\s*[#(]?\s*\d{1,3}\s*[.)\-\u2013\u2014\]:]?\s+/, '');
+        }
+
+        // Split "Artist - Title" on the first spaced dash. Returns {artist,title}.
+        function splitArtistTitle(s) {
+            var m = s.match(/^(.*?)\s+[-\u2013\u2014]\s+(.+)$/);
+            if (m && m[1].trim() && m[2].trim()) {
+                return { artist: m[1].trim(), title: m[2].trim() };
+            }
+            return { artist: '', title: s.trim() };
+        }
+
+        // Parse the raw text into an ordered array of tracks.
+        function parseTracklist(raw, onlyTimestamped) {
+            var lines = raw.split(/\r?\n/);
+            var tracks = [];
+
+            lines.forEach(function (line) {
+                var trimmed = line.trim();
+                if (!trimmed) return;
+
+                var tsMatch = trimmed.match(TS_RE);
+                var timestamp = tsMatch ? tsMatch[1] : '';
+
+                var songText = trimmed;
+                if (timestamp) {
+                    // Remove the timestamp and any bracketing around it, then
+                    // trim only a LEADING separator (e.g. "0:32 - Artist ...").
+                    // Interior dashes are kept so "Artist - Title" still splits.
+                    songText = songText.replace(TS_RE, ' ');
+                    songText = songText.replace(/[\[\]()]/g, ' ');
+                    songText = songText.replace(/^\s*[-\u2013\u2014:.\s]+/, '');
+                } else {
+                    if (onlyTimestamped) return;
+                    // Keep only lines that look like a numbered track entry.
+                    if (!/^\s*[#(]?\s*\d{1,3}\s*[.)\-\u2013\u2014\]]/.test(trimmed)) return;
+                }
+
+                songText = stripLeadNumber(songText).trim();
+                songText = songText.replace(/\s{2,}/g, ' ').replace(/^[-\u2013\u2014:.\s]+|[-\s]+$/g, '');
+                if (!songText) return;
+
+                var at = splitArtistTitle(songText);
+                tracks.push({
+                    timestamp: timestamp,
+                    seconds: timestamp ? timeToSeconds(timestamp) : null,
+                    artist: at.artist,
+                    title: at.title,
+                    raw: songText
+                });
+            });
+
+            return tracks;
+        }
+
+        // ---- Rendering ----
+        function render(tracks) {
+            currentTracks = tracks;
+            listEl.innerHTML = '';
+
+            if (!tracks.length) {
+                resultsEl.hidden = false;
+                countEl.textContent = '';
+                var li = document.createElement('li');
+                li.className = 'tl-empty';
+                li.textContent = 'No songs found. Paste the video description (the part with the timestamps) and try again.';
+                listEl.appendChild(li);
+                return;
+            }
+
+            countEl.textContent = tracks.length + (tracks.length === 1 ? ' song' : ' songs');
+
+            tracks.forEach(function (t, i) {
+                var li = document.createElement('li');
+                li.className = 'tl-track';
+
+                var num = document.createElement('span');
+                num.className = 'tl-num';
+                num.textContent = (i + 1) + '.';
+                li.appendChild(num);
+
+                if (t.timestamp) {
+                    var timeWrap = document.createElement('span');
+                    timeWrap.className = 'tl-time';
+                    if (currentVideoId && t.seconds != null) {
+                        var a = document.createElement('a');
+                        a.href = 'https://www.youtube.com/watch?v=' + currentVideoId + '&t=' + t.seconds + 's';
+                        a.target = '_blank';
+                        a.rel = 'noopener';
+                        a.textContent = t.timestamp;
+                        timeWrap.appendChild(a);
+                    } else {
+                        timeWrap.textContent = t.timestamp;
+                    }
+                    li.appendChild(timeWrap);
+                }
+
+                var song = document.createElement('span');
+                song.className = 'tl-song';
+                if (t.artist) {
+                    var artist = document.createElement('span');
+                    artist.className = 'tl-artist';
+                    artist.textContent = t.artist;
+                    var sep = document.createElement('span');
+                    sep.className = 'tl-sep';
+                    sep.textContent = ' — ';
+                    song.appendChild(artist);
+                    song.appendChild(sep);
+                }
+                song.appendChild(document.createTextNode(t.title));
+                li.appendChild(song);
+
+                var search = document.createElement('a');
+                search.className = 'tl-search';
+                search.href = 'https://www.youtube.com/results?search_query=' +
+                    encodeURIComponent((t.artist ? t.artist + ' ' : '') + t.title);
+                search.target = '_blank';
+                search.rel = 'noopener';
+                search.textContent = 'search';
+                li.appendChild(search);
+
+                listEl.appendChild(li);
+            });
+
+            resultsEl.hidden = false;
+        }
+
+        function collect() {
+            var tracks = parseTracklist(textEl.value, onlyTsEl.checked);
+            if (sortTsEl.checked) {
+                tracks = tracks.slice().sort(function (a, b) {
+                    return (a.seconds == null ? Infinity : a.seconds) -
+                           (b.seconds == null ? Infinity : b.seconds);
+                });
+            }
+            currentVideoId = parseVideoId(urlEl.value);
+            render(tracks);
+            if (tracks.length) {
+                setStatus('Found ' + tracks.length + ' song' + (tracks.length === 1 ? '' : 's') + '.');
+            }
+        }
+
+        // ---- Auto-fetch the description via public read proxies ----
+        // A static page can't call youtube.com directly (CORS), so we route
+        // through read-only proxies and pull "shortDescription" out of the
+        // page's embedded JSON. Best-effort — falls back to manual paste.
+        function proxyUrls(target) {
+            var enc = encodeURIComponent(target);
+            return [
+                'https://api.allorigins.win/raw?url=' + enc,
+                'https://corsproxy.io/?url=' + enc,
+                'https://thingproxy.freeboard.io/fetch/' + target
+            ];
+        }
+
+        function extractDescription(html) {
+            var m = html.match(/"shortDescription":"((?:\\.|[^"\\])*)"/);
+            if (!m) return '';
+            try {
+                return JSON.parse('"' + m[1] + '"');
+            } catch (e) {
+                return m[1].replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/\\\//g, '/');
+            }
+        }
+
+        function fetchDescription(videoId) {
+            var target = 'https://www.youtube.com/watch?v=' + videoId + '&hl=en';
+            var urls = proxyUrls(target);
+
+            return (function tryNext(i) {
+                if (i >= urls.length) return Promise.reject(new Error('all-proxies-failed'));
+                return fetch(urls[i], { headers: { 'Accept': 'text/html' } })
+                    .then(function (r) {
+                        if (!r.ok) throw new Error('bad-status');
+                        return r.text();
+                    })
+                    .then(function (html) {
+                        var desc = extractDescription(html);
+                        if (!desc) throw new Error('no-description');
+                        return desc;
+                    })
+                    .catch(function () { return tryNext(i + 1); });
+            })(0);
+        }
+
+        fetchBtn.addEventListener('click', function () {
+            var videoId = parseVideoId(urlEl.value);
+            if (!videoId) {
+                setStatus('That doesn\u2019t look like a YouTube link. Check the URL, or paste the description below.', true);
+                return;
+            }
+            currentVideoId = videoId;
+            fetchBtn.disabled = true;
+            var oldLabel = fetchBtn.textContent;
+            fetchBtn.textContent = 'Fetching…';
+            setStatus('Grabbing the description…');
+
+            fetchDescription(videoId)
+                .then(function (desc) {
+                    textEl.value = desc;
+                    collect();
+                    if (currentTracks.length) {
+                        setStatus('Read ' + currentTracks.length + ' song' +
+                            (currentTracks.length === 1 ? '' : 's') + ' from the description.');
+                    } else {
+                        setStatus('Got the description but found no timestamps in it. It may not have a tracklist, or the songs are listed in the comments — paste those below.', true);
+                    }
+                })
+                .catch(function () {
+                    setStatus('Couldn\u2019t auto-grab this one (YouTube or the proxy blocked it). Open the video, copy its description, and paste it in the box below — then press \u201cRead tracklist\u201d.', true);
+                })
+                .finally(function () {
+                    fetchBtn.disabled = false;
+                    fetchBtn.textContent = oldLabel;
+                });
+        });
+
+        parseBtn.addEventListener('click', collect);
+        onlyTsEl.addEventListener('change', function () { if (currentTracks.length || textEl.value.trim()) collect(); });
+        sortTsEl.addEventListener('change', function () { if (currentTracks.length || textEl.value.trim()) collect(); });
+
+        urlEl.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') { e.preventDefault(); fetchBtn.click(); }
+        });
+
+        // ---- Export ----
+        function tracksToText() {
+            return currentTracks.map(function (t, i) {
+                var line = (i + 1) + '. ';
+                if (t.timestamp) line += '[' + t.timestamp + '] ';
+                line += (t.artist ? t.artist + ' — ' : '') + t.title;
+                return line;
+            }).join('\n');
+        }
+
+        function csvCell(v) {
+            v = v == null ? '' : String(v);
+            return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v;
+        }
+
+        function tracksToCsv() {
+            var rows = [['#', 'Timestamp', 'Artist', 'Title']];
+            currentTracks.forEach(function (t, i) {
+                rows.push([i + 1, t.timestamp || '', t.artist || '', t.title || '']);
+            });
+            return rows.map(function (r) { return r.map(csvCell).join(','); }).join('\r\n');
+        }
+
+        function download(filename, content, type) {
+            var blob = new Blob([content], { type: type });
+            var a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+        }
+
+        copyBtn.addEventListener('click', function () {
+            if (!currentTracks.length) return;
+            var text = tracksToText();
+            var done = function () {
+                var old = copyBtn.textContent;
+                copyBtn.textContent = 'Copied';
+                setTimeout(function () { copyBtn.textContent = old; }, 1500);
+            };
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(done).catch(function () {
+                    window.prompt('Copy the tracklist:', text);
+                });
+            } else {
+                window.prompt('Copy the tracklist:', text);
+            }
+        });
+
+        txtBtn.addEventListener('click', function () {
+            if (currentTracks.length) download('tracklist.txt', tracksToText(), 'text/plain');
+        });
+        csvBtn.addEventListener('click', function () {
+            if (currentTracks.length) download('tracklist.csv', tracksToCsv(), 'text/csv');
+        });
+    })();
+    </script>
+</body>
+</html>
