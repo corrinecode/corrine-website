@@ -1120,7 +1120,7 @@ Full article and blog post display.
 /* Featured image at top of article/post */
 .content-featured-image {
     width: 100%;
-    margin-bottom: var(--spacing-large);
+    margin-bottom: 1.75rem;
 }
 
 /* Article/Post body content */
@@ -1130,6 +1130,11 @@ Full article and blog post display.
 
 .content-body p {
     margin-bottom: 1.75rem;
+}
+
+.content-body ul {
+    margin: 0 0 1.75rem;
+    padding-left: 1.5rem;
 }
 
 .content-body h2 {
@@ -1146,7 +1151,7 @@ Full article and blog post display.
 
 /* Images within content */
 .content-body img {
-    margin: var(--spacing-medium) 0;
+    margin: 1.75rem 0;
     width: 100%;
 }
 
