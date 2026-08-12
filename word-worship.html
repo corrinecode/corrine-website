@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--
+    ========================================
+    WORD WORSHIP PAGE - word-worship.html
+    ========================================
+    A grid of church marquee photos. Click any
+    one to open it large in a lightbox and page
+    through them with the arrows.
+    ========================================
+    -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Worship | Corrine Ciani</title>
+    <link rel="stylesheet" href="css/style.css?v=20260812">
+</head>
+<body>
+    <!-- Home button -->
+    <a href="index.html" class="home-button">
+        <img src="images/gifcities.gif" alt="Home">
+    </a>
+
+    <main class="word-worship">
+        <div class="ww-intro">
+            <p>Church in Burbank, California.</p>
+        </div>
+
+        <div class="ww-grid">
+            <img src="images/marquee-1.jpg" alt="Westminster Presbyterian Church marquee, Burbank" loading="lazy">
+            <img src="images/marquee-2.jpg" alt="Westminster Presbyterian Church marquee, Burbank" loading="lazy">
+            <img src="images/marquee-3.jpg" alt="Westminster Presbyterian Church marquee, Burbank" loading="lazy">
+            <img src="images/marquee-4.jpg" alt="Westminster Presbyterian Church marquee, Burbank" loading="lazy">
+            <img src="images/marquee-5.jpg" alt="Westminster Presbyterian Church marquee, Burbank" loading="lazy">
+            <img src="images/marquee-6.jpg" alt="Westminster Presbyterian Church marquee, Burbank" loading="lazy">
+            <img src="images/marquee-7.jpg" alt="Westminster Presbyterian Church marquee, Burbank" loading="lazy">
+            <img src="images/marquee-8.jpg" alt="Westminster Presbyterian Church marquee, Burbank" loading="lazy">
+            <img src="images/marquee-9.jpg" alt="Westminster Presbyterian Church marquee, Burbank" loading="lazy">
+            <img src="images/marquee-10.jpg" alt="Westminster Presbyterian Church marquee, Burbank" loading="lazy">
+            <img src="images/marquee-11.jpg" alt="Westminster Presbyterian Church marquee, Burbank" loading="lazy">
+            <img src="images/marquee-12.jpg" alt="Westminster Presbyterian Church marquee, Burbank" loading="lazy">
+            <img src="images/marquee-13.jpg" alt="Westminster Presbyterian Church marquee, Burbank" loading="lazy">
+            <img src="images/marquee-14.jpg" alt="Westminster Presbyterian Church marquee, Burbank" loading="lazy">
+            <img src="images/marquee-15.jpg" alt="Westminster Presbyterian Church marquee, Burbank" loading="lazy">
+            <img src="images/marquee-16.jpg" alt="Westminster Presbyterian Church marquee, Burbank" loading="lazy">
+            <img src="images/marquee-17.jpg" alt="Westminster Presbyterian Church marquee, Burbank" loading="lazy">
+            <img src="images/marquee-18.jpg" alt="Westminster Presbyterian Church marquee, Burbank" loading="lazy">
+            <img src="images/marquee-19.jpg" alt="Westminster Presbyterian Church marquee, Burbank" loading="lazy">
+            <img src="images/marquee-20.jpg" alt="Westminster Presbyterian Church marquee, Burbank" loading="lazy">
+            <img src="images/marquee-21.jpg" alt="Westminster Presbyterian Church marquee, Burbank" loading="lazy">
+            <img src="images/marquee-22.jpg" alt="Westminster Presbyterian Church marquee, Burbank" loading="lazy">
+            <img src="images/marquee-23.jpg" alt="Westminster Presbyterian Church marquee, Burbank" loading="lazy">
+            <img src="images/marquee-24.jpg" alt="Westminster Presbyterian Church marquee, Burbank" loading="lazy">
+            <img src="images/marquee-25.jpg" alt="Westminster Presbyterian Church marquee, Burbank" loading="lazy">
+            <img src="images/marquee-26.jpg" alt="Westminster Presbyterian Church marquee, Burbank" loading="lazy">
+            <img src="images/marquee-27.jpg" alt="Westminster Presbyterian Church marquee, Burbank" loading="lazy">
+            <img src="images/marquee-28.jpg" alt="Westminster Presbyterian Church marquee, Burbank" loading="lazy">
+            <img src="images/marquee-29.jpg" alt="Westminster Presbyterian Church marquee, Burbank" loading="lazy">
+            <img src="images/marquee-30.jpg" alt="Westminster Presbyterian Church marquee, Burbank" loading="lazy">
+        </div>
+
+        <div class="back-link">
+            <a href="notes.html">&larr; Back to Observations</a>
+        </div>
+    </main>
+
+    <!-- Lightbox -->
+    <div class="ww-lightbox" id="wwLightbox">
+        <button class="ww-close" id="wwClose" aria-label="Close">&times;</button>
+        <button class="ww-nav ww-prev" id="wwPrev" aria-label="Previous">&#8249;</button>
+        <img id="wwLightboxImg" src="" alt="">
+        <button class="ww-nav ww-next" id="wwNext" aria-label="Next">&#8250;</button>
+    </div>
+
+    <script>
+        (function () {
+            var thumbs = Array.prototype.slice.call(document.querySelectorAll('.ww-grid img'));
+            var box = document.getElementById('wwLightbox');
+            var boxImg = document.getElementById('wwLightboxImg');
+            var current = 0;
+
+            function show(i) {
+                current = (i + thumbs.length) % thumbs.length;
+                boxImg.src = thumbs[current].src;
+            }
+
+            function open(i) {
+                show(i);
+                box.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function close() {
+                box.classList.remove('open');
+                document.body.style.overflow = '';
+            }
+
+            thumbs.forEach(function (img, i) {
+                img.addEventListener('click', function () { open(i); });
+            });
+
+            document.getElementById('wwPrev').addEventListener('click', function (e) {
+                e.stopPropagation();
+                show(current - 1);
+            });
+            document.getElementById('wwNext').addEventListener('click', function (e) {
+                e.stopPropagation();
+                show(current + 1);
+            });
+            document.getElementById('wwClose').addEventListener('click', close);
+
+            // Click outside the image closes
+            box.addEventListener('click', function (e) {
+                if (e.target === box) close();
+            });
+
+            // Keyboard: arrows + escape
+            document.addEventListener('keydown', function (e) {
+                if (!box.classList.contains('open')) return;
+                if (e.key === 'Escape') close();
+                else if (e.key === 'ArrowLeft') show(current - 1);
+                else if (e.key === 'ArrowRight') show(current + 1);
+            });
+        })();
+    </script>
+</body>
+</html>
