@@ -1192,6 +1192,105 @@ Full article and blog post display.
     font-size: 0.95rem;
 }
 
+/*
+========================================
+WORD WORSHIP - photo grid + lightbox
+========================================
+*/
+.word-worship {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: var(--spacing-large) var(--spacing-medium);
+}
+
+.ww-intro {
+    max-width: var(--max-width-text);
+    margin: 0 auto var(--spacing-medium);
+    text-align: center;
+}
+
+.ww-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+}
+
+.ww-grid img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.ww-grid img:hover {
+    opacity: 0.8;
+}
+
+/* Lightbox overlay */
+.ww-lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.92);
+    align-items: center;
+    justify-content: center;
+}
+
+.ww-lightbox.open {
+    display: flex;
+}
+
+.ww-lightbox img {
+    max-width: 88vw;
+    max-height: 88vh;
+    object-fit: contain;
+}
+
+.ww-nav,
+.ww-close {
+    position: absolute;
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    line-height: 1;
+    padding: 1rem;
+    opacity: 0.75;
+    transition: opacity 0.2s ease;
+}
+
+.ww-nav:hover,
+.ww-close:hover {
+    opacity: 1;
+}
+
+.ww-nav {
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2.5rem;
+}
+
+.ww-prev { left: 0.5rem; }
+.ww-next { right: 0.5rem; }
+
+.ww-close {
+    top: 0.5rem;
+    right: 0.75rem;
+    font-size: 2rem;
+}
+
+@media (max-width: 600px) {
+    .ww-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+    }
+
+    .ww-nav { font-size: 2rem; }
+}
+
 /* On the centered menu pages, anchor the back link to the bottom */
 .blog-menu {
     position: relative;
