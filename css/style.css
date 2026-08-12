@@ -340,6 +340,15 @@ left-aligned minimal navigation.
     width: auto;
 }
 
+/* Print-star home button (small). The cigarette gif markup is kept in
+   git history / images/gifcities.gif if we ever want to switch back. */
+.home-star {
+    display: block;
+    font-size: 22px;
+    line-height: 1;
+    color: var(--color-text);
+}
+
 .home-button:hover {
     opacity: 0.6;
 }
