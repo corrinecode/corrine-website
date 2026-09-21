@@ -583,6 +583,7 @@ WRITING LIST (External Links)
     width: 100%;
     max-width: 452px;
     height: auto;
+    max-height: none; /* override .italy img max-height so aspect ratio is kept */
     margin: 0.4rem 0 1.6rem;
 }
 
