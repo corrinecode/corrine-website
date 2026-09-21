@@ -577,6 +577,15 @@ WRITING LIST (External Links)
     margin-bottom: 0;
 }
 
+/* Inline image within a text flow (e.g. Movie Descriptions) */
+.italy-text .inline-image {
+    display: block;
+    width: 100%;
+    max-width: 452px;
+    height: auto;
+    margin: 0.4rem 0 1.6rem;
+}
+
 /* Two images side by side */
 .italy-row {
     display: flex;
